@@ -6,10 +6,10 @@ const WrappedCircle = ({ walletAddress, setWalletAddress, fetchData }) => {
       <img src="/Logo.svg" className="w-[230px] h-auto" />
       <img src="/Wrapped.svg" className="w-[444px] h-auto" />
       <p className="text-center font-semibold text-white text-[14px] leading-[20px] px-6 opacity-60 capitalize tracking-wide">
-        Connect/enter your wallet to find a summary of your trading activity.{" "}
+        Connect/enter your wallet to find a summary of your trading activity
         <br></br>
         <br></br>
-        Supported exchanges: Hyperliquid, DYDX, and Vertex.
+        Supported exchanges: Hyperliquid, DYDX, and Vertex
       </p>
       <div className="bg-white bg-opacity-[3%] border w-[349px] border-white border-opacity-[5%] py-1 px-3 rounded-[6px] flex">
         <input
