@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HyperliquidData from "../HyperliquidData";
 import VertexData from "../VertexData";
 import DYDXData from "../DYDXData";
@@ -9,6 +9,32 @@ import { MdArrowBackIos } from "react-icons/md";
 
 const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [showNewComponent, setShowNewComponent] = useState(false);
+
+  const [hyperliquidData, setHyperliquidData] = useState(null);
+  const [vertexData, setVertexData] = useState(null);
+  const [dydxData, setDydxData] = useState(null);
+
+  const [isAnyDataAvailable, setIsAnyDataAvailable] = useState(false);
+
+  console.group("Data");
+  console.log(hyperliquidData);
+  console.log(vertexData);
+  console.log(dydxData);
+  console.groupEnd();
+
+ useEffect(() => {
+  if (
+    (hyperliquidData && hyperliquidData.totalVolume > 0) ||
+    (vertexData && vertexData.totalVolume > 0) ||
+    (dydxData && dydxData.totalVolume > 0)
+  ) {
+    setIsAnyDataAvailable(true);
+    return;
+  }
+
+  console.log("Data is available");
+  setIsAnyDataAvailable(false);
+}, [hyperliquidData, vertexData, dydxData]);
 
   const [summaryData, setSummaryData] = useState({
     totalVolume: 0,
@@ -42,13 +68,15 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
     }
   };
 
+  console.log("isAnyDataAvailable", isAnyDataAvailable);
+
   return (
     <div className="dashboard-container">
       {/* Persistent Back Button */}
-      <button className="back-button" onClick={handleBackClick}>
+      {showNewComponent && <button className="back-button" onClick={handleBackClick}>
         <MdArrowBackIos size={24} />
         <p>Back</p>
-      </button>
+      </button>}
 
       {/* Main Content */}
       <div className="data-container">
@@ -58,18 +86,21 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               <HyperliquidData
                 walletAddress={walletAddress}
                 updateTotals={updateTotals}
+                setHyperliquidData={setHyperliquidData}
               />
             )}
             {walletAddress && (
               <VertexData
                 walletAddress={walletAddress}
                 updateTotals={updateTotals}
+                setVertexData={setVertexData}
               />
             )}
             {walletAddress && (
               <DYDXData
                 walletAddress={walletAddress}
                 updateTotals={updateTotals}
+                setDydxData={setDydxData}
               />
             )}
           </div>
@@ -82,14 +113,16 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
             />
           </div>
         )}
-        <div className="next-button-container">
-          {!showNewComponent ? (
-            <button className="next-button" onClick={handleNextClick}>
-              Mint Genesis NFT
-              <FaAngleRight size={24} />
-            </button>
-          ) : null}
-        </div>
+     <div className="next-button-container">
+  {!showNewComponent && isAnyDataAvailable ? (
+    <button className="next-button" onClick={handleNextClick}>
+      Mint Genesis NFT
+      <FaAngleRight size={24} />
+    </button>
+  ) : !isAnyDataAvailable ? (
+    <p className="text-white">Not Eligible!</p>
+  ) : null}
+</div>
       </div>
     </div>
   );

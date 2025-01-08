@@ -35,8 +35,13 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
     const tweetUrl = `https://twitter.com/intent/tweet?text=Just%20checked%20out%20my%20journey%20with%20perpetuals%20so%20far%20on%20Filament%20Wrapped%20%F0%9F%93%88%20%20check%20yours%20here%3A%20wrapped.filament.finance`;
     window.open(tweetUrl, "_blank");
   };
-  const minTNFT = () => {
-    mintNFT(walletAddress)
+  
+  const handleNFT = async() => {
+    try {
+      const res = await mintNFT(walletAddress)
+    } catch (e) {
+      console.error("Error minting NFT:", e);
+    }
   }
 
   const downloadImage = async (imageSrc, imageName) => {
@@ -217,7 +222,7 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
         </button>
         <button
           className="p-4 text-white font-semibold rounded-2xl bg-teal-900 backdrop-blur-[30px] w-60 flex justify-center items-center gap-2"
-          onClick={minTNFT}
+          onClick={handleNFT}
         >
           Mint NFT
         </button>

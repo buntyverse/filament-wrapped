@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataCard from "./Cards/DataCard";
 
-const VertexData = ({ walletAddress, updateTotals }) => {
+const VertexData = ({ walletAddress, updateTotals, setVertexData }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -63,6 +63,7 @@ const VertexData = ({ walletAddress, updateTotals }) => {
       console.log(totalPnL, "totalPnl");
 
       setData({ totalVolume, totalPnL });
+      setVertexData({ totalVolume, totalPnL });
     } catch (error) {
       console.error("Error fetching Vertex data:", error.message);
     } finally {

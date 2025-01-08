@@ -20,11 +20,14 @@ function App() {
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
   const addressToPass = connectedWalletAddress || walletAddress;
+  // const addressToPass = '0xBf7Ac59948Fb15A24Fe9a97699294b3F7b7f1300'
+
+  console.log("REACT_APP_CROSSMINT_API_KEY", process.env.REACT_APP_CROSSMINT_API_KEY);
 
   const fetchData = () => {
-    if (!walletAddress) {
-      alert("Please enter a wallet address!");
-    }
+    // if (!walletAddress) {
+    //   alert("Please enter a wallet address!");
+    // }
 
     setIsDashboardVisible(true);
   };

@@ -2,12 +2,15 @@
 // or "polygon-amoy", "ethereum-sepolia", ... // or "www"
 
 
-const mintNFT = (address) => {
+const mintNFT = async(address) => {
 
-    const apiKey = "sk_production_26GKj26W38mHhH4TeBGjo37p9ZT6oY6KsniY7zCS3w5ydera294iDngYejaAjrtzqpX7SNYZetnkpfUpyB6gXtHxLGGvXL9kNCvEwCgnBtYDUqpsfZDKYNx1iEr6BDpSj31tayr2r8K5KqQmZdkjdQy8iHhU6ByQyzL4tyDfSkiRHFydah9QQGBQVysEPKSaYDxChAmsvFsE7E5zdDj8qDK";
+    const apiKey = process.env.REACT_APP_CROSSMINT_API_KEY;
+
+    if (!apiKey) { 
+        throw new Error("API key is missing");
+    }
     
     const url = `/collections/default-polygon/nfts`;
-
 
     const options = {
         method: "POST",
@@ -18,16 +21,22 @@ const mintNFT = (address) => {
         },
         body: JSON.stringify(
             {
-      "templateId":"49185993-e02a-4a60-862d-3d4d7e47aa0a",
-      "recipient": "polygon:0xef40B20A244c02498caB7fA9E4AE5276f06Cd7aC"
+      "templateId": process.env.REACT_APP_TEMPLATE_ID,
+      "recipient": `polygon:${address}`
     }
         ),
     };
     
-    fetch(url, options)
-        .then((res) => res.json())
-        .then((json) => console.log(json))
-        .catch((err) => console.error("error:" + err));}
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log(data);
+    return data; 
+  } catch (err) {
+    console.error("Error:", err);
+    throw err; 
+  }   
+}
 
 
 export default mintNFT;

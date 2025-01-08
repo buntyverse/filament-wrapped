@@ -3,7 +3,7 @@ import axios from "axios";
 import DataCard from "./Cards/DataCard";
 import { coinList } from "../components/assets/list";
 
-const HyperliquidData = ({ walletAddress, updateTotals }) => {
+const HyperliquidData = ({ walletAddress, updateTotals, setHyperliquidData }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -84,6 +84,13 @@ const HyperliquidData = ({ walletAddress, updateTotals }) => {
           netPnL,
           tradedAssets: Array.from(tradedAssets),
         });
+        
+        setHyperliquidData({
+          totalVolume,
+          netPnL,
+          tradedAssets: Array.from(tradedAssets),
+        });
+
       } catch (error) {
         console.error("Error fetching Hyperliquid data:", error.message);
       } finally {

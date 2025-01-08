@@ -16,6 +16,18 @@ code {
     monospace;
 }
 
+.connect-button {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, #40e0d0 0%, #2accbb 100%);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
 /* Responsive Adjustments @media (max-width: 768px) {
   html,
   body {
