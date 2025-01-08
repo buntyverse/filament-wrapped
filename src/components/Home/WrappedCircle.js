@@ -6,7 +6,7 @@ const WrappedCircle = ({ walletAddress, setWalletAddress, fetchData }) => {
       <img src="/Logo.svg" className="w-[230px] h-auto" />
       <img src="/Wrapped.svg" className="w-[444px] h-auto" />
       <p className="text-center font-semibold text-white text-[14px] leading-[20px] px-6 opacity-60 capitalize tracking-wide">
-        Connect/enter your wallet to find a summary of your trading activity
+        Connect/enter your wallet to find a summary of your trading activity and mint the Genesis NFT
         <br></br>
         <br></br>
         Supported exchanges: Hyperliquid, DYDX, and Vertex

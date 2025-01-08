@@ -85,7 +85,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
         <div className="next-button-container">
           {!showNewComponent ? (
             <button className="next-button" onClick={handleNextClick}>
-              See badges
+              Mint Genesis NFT
               <FaAngleRight size={24} />
             </button>
           ) : null}

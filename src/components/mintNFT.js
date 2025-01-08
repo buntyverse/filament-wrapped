@@ -6,7 +6,7 @@ const mintNFT = (address) => {
 
     const apiKey = "sk_production_26GKj26W38mHhH4TeBGjo37p9ZT6oY6KsniY7zCS3w5ydera294iDngYejaAjrtzqpX7SNYZetnkpfUpyB6gXtHxLGGvXL9kNCvEwCgnBtYDUqpsfZDKYNx1iEr6BDpSj31tayr2r8K5KqQmZdkjdQy8iHhU6ByQyzL4tyDfSkiRHFydah9QQGBQVysEPKSaYDxChAmsvFsE7E5zdDj8qDK";
     
-    const url = `https://www.crossmint.com/api/2022-06-09/collections/default-polygon/nfts`;
+    const url = `/collections/default-polygon/nfts`;
 
 
     const options = {
