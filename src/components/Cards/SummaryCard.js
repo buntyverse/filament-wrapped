@@ -14,6 +14,7 @@ import fiveHPnL from "../assets/500kPnL1.png";
 import oneMilPnL from "../assets/1milPnL.png";
 import newbie from "../assets/newbie.png";
 import { FaXTwitter } from "react-icons/fa6";
+import mintNFT from "../mintNFT";
 
 const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
   const [copied, setCopied] = useState(false);
@@ -210,6 +211,12 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
           onClick={handleTweet}
         >
           Share On <FaXTwitter className="text-xl" />
+        </button>
+        <button
+          className="p-4 text-white font-semibold rounded-2xl bg-teal-900 backdrop-blur-[30px] w-60 flex justify-center items-center gap-2"
+          onClick={mintNFT}
+        >
+          Mint NFT
         </button>
       </div>
 
