@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import WalletForm from "./components/WalletForm";
-import HyperliquidData from "./components/HyperliquidData";
-import VertexData from "./components/VertexData";
-import DYDXData from "./components/DYDXData";
 import Navbar from "./components/Home/Navbar";
 import WrappedCircle from "./components/Home/WrappedCircle";
 import Dashboard from "./components/Dashboard/Dashboard";
-import { Wallet } from "./components/Providers/Wallet";
 import { useAccount } from "wagmi";
-import { FaArrowLeft, FaChevronLeft } from "react-icons/fa";
-import { FaArrowLeftLong } from "react-icons/fa6";
 
 // 0x316fc62528c317e569fe5aa4df6c1af0c4f2e678
 

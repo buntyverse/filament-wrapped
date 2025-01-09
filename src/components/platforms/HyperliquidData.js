@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DataCard from "./Cards/DataCard";
-import { coinList } from "../components/assets/list";
+import DataCard from "../Cards/DataCard";
+import { coinList } from "../assets/list";
 
 const HyperliquidData = ({ walletAddress, updateTotals, setHyperliquidData }) => {
   const [data, setData] = useState(null);

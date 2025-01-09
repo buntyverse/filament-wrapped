@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DataCard from "./Cards/DataCard";
+import DataCard from "../Cards/DataCard";
 
 const VertexData = ({ walletAddress, updateTotals, setVertexData }) => {
   const [data, setData] = useState(null);

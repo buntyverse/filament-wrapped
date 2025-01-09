@@ -66,23 +66,23 @@ const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc }) => {
               Total Volume:
             </span>
             <p className="text-lg md:text-xl text-white ">
-              {totalVolume.toLocaleString("en-US", {
+              {totalVolume?.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
           </div>
-          <div className="flex flex-col gap-1">
+          {pnl && <div className="flex flex-col gap-1">
             <span className="text-sm md:text-base text-gray-400">
               Total PnL:
             </span>
             <p className="text-lg md:text-xl text-white ">
-              {pnl.toLocaleString("en-US", {
+              {pnl?.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
-          </div>
+          </div>}
           {tradedAssets.length !== 0 && (
             <div className="flex flex-col gap-1">
               <span className="text-sm md:text-base text-gray-400">

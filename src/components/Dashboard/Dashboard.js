@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import HyperliquidData from "../HyperliquidData";
-import VertexData from "../VertexData";
-import DYDXData from "../DYDXData";
+import HyperliquidData from "../platforms/HyperliquidData";
+import VertexData from "../platforms/VertexData";
+import DYDXData from "../platforms/DYDXData";
 import "./Dashboard.css";
 import BadgeCard from "../Cards/SummaryCard";
 import { FaAngleRight } from "react-icons/fa6";
 import { MdArrowBackIos } from "react-icons/md";
+import FilamentProData from "../platforms/FilamentProData";
 
 const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [showNewComponent, setShowNewComponent] = useState(false);
@@ -13,6 +14,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [hyperliquidData, setHyperliquidData] = useState(null);
   const [vertexData, setVertexData] = useState(null);
   const [dydxData, setDydxData] = useState(null);
+  const [filamentProdata, setFilamentProData] = useState(null);
 
   const [isAnyDataAvailable, setIsAnyDataAvailable] = useState(false);
 
@@ -26,7 +28,8 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   if (
     (hyperliquidData && hyperliquidData.totalVolume > 0) ||
     (vertexData && vertexData.totalVolume > 0) ||
-    (dydxData && dydxData.totalVolume > 0)
+    (dydxData && dydxData.totalVolume > 0) || 
+    (filamentProdata && filamentProdata.Volume > 0)
   ) {
     setIsAnyDataAvailable(true);
     return;
@@ -34,7 +37,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   console.log("Data is available");
   setIsAnyDataAvailable(false);
-}, [hyperliquidData, vertexData, dydxData]);
+}, [hyperliquidData, vertexData, dydxData, filamentProdata]);
 
   const [summaryData, setSummaryData] = useState({
     totalVolume: 0,
@@ -101,6 +104,12 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                 walletAddress={walletAddress}
                 updateTotals={updateTotals}
                 setDydxData={setDydxData}
+              />
+            )}
+            {walletAddress && (
+              <FilamentProData
+                walletAddress={walletAddress}
+                setFilamentProData={setFilamentProData}
               />
             )}
           </div>
