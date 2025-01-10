@@ -11,6 +11,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -36,3 +43,82 @@ code {
     overflow: hidden;
   }
 } */
+
+.press-start-2p-regular {
+  font-family: "Press Start 2P", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.connect-btn{
+  display: flex;
+  padding: 32px 101px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 14px;
+  border: 3px solid rgba(255, 255, 255, 0.20);
+  background: linear-gradient(0deg, #37F8FF 0%, #00A9AE 100%);
+  box-shadow: 0px 4px 7.1px 0px rgba(255, 255, 255, 0.10) inset, 0px -19px 0px 0px #3EA5A9 inset;
+}
+
+.connect-btn:hover {
+  box-shadow: 0px 4px 9.7px 0px rgba(255, 255, 255, 0.10) inset, 0px -13px 0px 0px #3EA5A9 inset;
+}
+
+
+.connect-btn:active {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), linear-gradient(0deg, #37F8FF 0%, #00A9AE 100%);
+  box-shadow: 0px 4px 9.7px 0px rgba(255, 255, 255, 0.10) inset, 0px -2px 0px 0px #3EA5A9 inset;
+}
+
+.disconnect-btn{
+  display: flex;
+  padding: 17px 24px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.20);
+  background: linear-gradient(0deg, #595D74 0%, #0B0A0F 100%);
+  box-shadow: 0px 4px 7.1px 0px rgba(255, 255, 255, 0.10) inset, 0px 0px 0px 0px #070D0D inset;
+}
+
+.back-btn{
+  display: flex;
+  height: 129px;
+  padding: 32px 101px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 14px;
+  border: 3px solid rgba(255, 255, 255, 0.20);
+  background: linear-gradient(0deg, #595D74 0%, #0B0A0F 100%);
+  box-shadow: 0px 4px 7.1px 0px rgba(255, 255, 255, 0.10) inset, 0px -19px 0px 0px #070D0D inset;
+}
+
+.back-btn:hover{
+  background: linear-gradient(0deg, #4B4E62 0%, #121117 100%);
+  box-shadow: 0px 4px 9.7px 0px rgba(255, 255, 255, 0.10) inset, 0px -13px 0px 0px #070D0D inset;
+}
+
+
+.back-btn:active{
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), linear-gradient(0deg, #444659 0%, #1C1B22 100%);
+  box-shadow: 0px 4px 9.7px 0px rgba(255, 255, 255, 0.10) inset;
+}
+
+
+.faded-bg{
+  border-radius: 25px;
+border: 2px solid rgba(55, 248, 255, 0.00);
+background: rgba(15, 15, 15, 0.10);
+backdrop-filter: blur(10.550000190734863px);
+}
+
+.toast{
+  border-radius: 9px;
+border: 1px solid rgba(156, 163, 175, 0.10);
+background: rgba(0, 0, 0, 0.50);
+backdrop-filter: blur(2px);
+}

@@ -44,3 +44,11 @@
   background: rgba(11, 18, 22, 0.40);
   backdrop-filter: blur(30.399999618530273px);
 }
+
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

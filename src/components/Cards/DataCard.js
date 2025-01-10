@@ -32,16 +32,16 @@ const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc }) => {
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="cardMoprh px-6 py-8 w-full md:w-96 lg:w-[28rem] max-w-[90%] mx-auto flex flex-col gap-6 bg-gray-800 rounded-lg shadow-lg "
+        className={`cardMoprh px-6 py-8 h-min flex flex-col items-center gap-6 bg-gray-800 rounded-lg shadow-lg`}
         style={tiltStyle}
       >
-        <div className="  ">
+      
           <img
-            className="w-28 sm:w-24 h-auto mx-auto"
+            className="h-[31px] w-auto"
             src={imgSrc}
             alt="Asset"
           />
-        </div>
+    
         <div className="w-full h-full flex justify-center ">
           <p className="text-center text-gray-200 sm:text-sm ">No Data Found</p>
         </div>
@@ -51,44 +51,44 @@ const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc }) => {
 
   return (
     <div
-      className="cardMoprh px-6 py-8 w-full md:w-96 lg:w-[28rem] max-w-[90%] mx-auto flex flex-col gap-6 bg-gray-800 rounded-lg shadow-lg"
+      className={`${Number(totalVolume) > 0 ? 'border !border-[#37F8FF] !border-opacity-[40%]' : ''} cursor-pointer cardMoprh px-[77px] py-8 flex flex-col justify-center items-center gap-6 bg-gray-800 rounded-lg shadow-lg`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={tiltStyle}
     >
-      <img className="h-auto mx-auto" src={imgSrc} alt="Asset" />
+      <img className="h-[31px] w-auto mx-auto" src={imgSrc} alt="Asset" />
       {loading ? (
         <p className="text-center text-gray-400">Loading...</p>
       ) : (
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-1">
-            <span className="text-sm md:text-base text-gray-400">
-              Total Volume:
+          <div className="flex flex-col items-center">
+            <span className="text-[24px] text-[#595D74]">
+              Total Volume
             </span>
-            <p className="text-lg md:text-xl text-white ">
+            <p className="text-[24px] text-white press-start-2p-regular">
               {totalVolume?.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
           </div>
-          {pnl && <div className="flex flex-col gap-1">
-            <span className="text-sm md:text-base text-gray-400">
+          {pnl ? <div className="flex flex-col items-center">
+            <span className="text-[24px] text-[#595D74]">
               Total PnL:
             </span>
-            <p className="text-lg md:text-xl text-white ">
+            <p className="text-[24px] text-white press-start-2p-regular">
               {pnl?.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
-          </div>}
+          </div> : null}
           {tradedAssets.length !== 0 && (
-            <div className="flex flex-col gap-1">
-              <span className="text-sm md:text-base text-gray-400">
-                Traded Assets:
+            <div className="flex flex-col items-center">
+              <span className="text-[24px] text-[#595D74]">
+                Assets Traded
               </span>
-              <p className="text-lg md:text-xl text-white ">
+              <p className="text-[16px] text-white ">
                 {tradedAssets.join(", ")}
               </p>
             </div>

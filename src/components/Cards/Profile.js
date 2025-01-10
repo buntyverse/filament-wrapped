@@ -69,7 +69,7 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
   const currentCard = badges[currentCardIndex];
 
   return (
-    <div className="flex flex-col items-center justify-center  text-white p-4 rounded-lg shadow-white">
+    <div className="flex flex-col items-center justify-center  text-white shadow-white">
       <div
         className="w-full max-w-[400px] flex flex-col relative"
         onTouchStart={handleTouchStart}
@@ -90,17 +90,23 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
         <div className="flex-grow flex items-center justify-center relative mt-4">
           <div className="p-4  rounded-lg w-full max-w-[95%] md:max-w-[400px]">
             {currentCard.imageUrl && (
-              <div className="md:w-[350px] h-[350px] sm:h-[350px] sm:w-full  md:h-[450px] rounded-xl ">
-                <img
-                  src={currentCard.imageUrl}
-                  alt={currentCard.name}
-                  className="object-fill h-full w-full rounded-lg "
-                />
+              <div className=" rounded-[19px]">
+              <video  autoPlay
+                  loop
+                  controlsList="nodownload nofullscreen noplaybackrate"
+                  disablePictureInPicture
+                  muted
+                  className=" pointer-events-none object-cover rounded-[19px] w-full h-full"
+                  playsInline
+                  width="600" controls>
+                <source src="genesis-vid.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
               </div>
             )}
 
             {/* Button container */}
-            <div className="flex space-x-4 justify-start mt-3">
+            {/* <div className="flex space-x-4 justify-start mt-3">
               <button
                 className="text-white hover:text-emerald-400 transition"
                 onClick={(event) => {
@@ -119,15 +125,15 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
               >
                 <MdDownload size={24} />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
 
       {/* Previous/Next Buttons */}
-      <div className="absolute inset-0 flex z-0 h-1/3 lg:h-2/5 top-32">
+      {/* <div className="absolute inset-0 flex z-0 h-1/3 lg:h-2/5 top-32"> */}
         {/* Left arrow button */}
-        <div
+        {/* <div
           className="w-1/2 cursor-pointer z-1 flex items-center justify-start pl-4"
           onClick={handlePreviousCard}
         >
@@ -139,10 +145,10 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
           >
             <FaChevronLeft size={24} />
           </button>
-        </div>
+        </div> */}
 
         {/* Right arrow button */}
-        <div
+        {/* <div
           className="w-1/2 cursor-pointer z-1 flex items-center justify-end pr-4"
           onClick={handleNextCard}
         >
@@ -156,8 +162,8 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
           >
             <FaChevronRight size={24} />
           </button>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </div>
   );
 };

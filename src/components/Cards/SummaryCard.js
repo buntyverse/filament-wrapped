@@ -200,8 +200,8 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
   }, [summaryData]);
 
   return (
-    <div className=" p-8 flex flex-col items-center rounded-xl  overflow-auto">
-      <div className="flex flex-col items-center max-w-full">
+    <div className="flex flex-col items-center rounded-xl  overflow-auto px-[103px]">
+      <div className="card flex flex-col items-center w-full faded-bg">
         {!loading && badges.length > 0 ? (
           <CardStepper
             badges={badges}
@@ -213,20 +213,14 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
         )}
       </div>
 
-      <div className="flex justify-center mt-4 gap-6 items-center w-full flex-wrap">
-        <button
-          className="p-4 text-white font-semibold rounded-2xl bg-teal-900 backdrop-blur-[30px] w-60 flex justify-center items-center gap-2"
-          onClick={handleTweet}
-        >
-          Share On <FaXTwitter className="text-xl" />
-        </button>
+      {/* <div className="flex justify-center mt-4 gap-6 items-center w-full flex-wrap">
         <button
           className="p-4 text-white font-semibold rounded-2xl bg-teal-900 backdrop-blur-[30px] w-60 flex justify-center items-center gap-2"
           onClick={handleNFT}
         >
           Mint NFT
         </button>
-      </div>
+      </div> */}
 
       {copied && (
         <div className="mt-4 text-green-500 text-center">
@@ -234,7 +228,7 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
         </div>
       )}
     </div>
-  );
+  );  
 };
 
 export default BadgeCard;
