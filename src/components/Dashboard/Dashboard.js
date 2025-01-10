@@ -218,7 +218,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
         );
       }}
             </ConnectButton.Custom>
-               <div className="data-section flex-1 flex-wrap">
+               <div className="data-section flex-1 flex-wrap mt-6">
             {dataCards.map((card, index) => {
               const CardComponent = card.component;
               return (
@@ -237,7 +237,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
           </div>
        
         ) : (
-          <div className="badge-section flex flex-col justify-between">
+          <div className="badge-section flex flex-col justify-between px-[103px]">
             <BadgeCard
               walletAddress={walletAddress}
               summaryData={summaryData}
@@ -258,9 +258,9 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               
           </div>
         )}
-     <div className="next-button-container">
+  
   {!showNewComponent && isAnyDataAvailable ? (
-    <button className="next-button mint-btn press-start-2p-regular" onClick={handleNextClick}>
+    <button className="text-black press-start-2p-regular text-[32px] connect-btn" onClick={handleNextClick}>
       Mint Genesis NFT
       <FaAngleRight size={24} />
     </button>
@@ -270,7 +270,6 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                 Not Eligible to mint: Must Have Activity on any of the listed Dapps
               </div>
   ) : null}
-</div>
       </div>
     </div>
   );

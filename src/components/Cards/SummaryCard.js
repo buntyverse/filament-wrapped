@@ -200,11 +200,13 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
   }, [summaryData]);
 
   return (
-    <div className="flex flex-col items-center rounded-xl  overflow-auto px-[103px]">
-      <div className="card flex flex-col items-center w-full faded-bg">
+    <div className="flex flex-col items-center rounded-xl  overflow-auto ">
+      <div className="relative card flex flex-col items-center w-full overflow-hidden">
+        <img src="/square.svg" className="absolute z-10 w-full h-auto overflow-hidden"></img>
         {!loading && badges.length > 0 ? (
           <CardStepper
             badges={badges}
+            walletAddress={walletAddress}
             handleCopyImage={handleCopyImage}
             downloadImage={downloadImage}
           />

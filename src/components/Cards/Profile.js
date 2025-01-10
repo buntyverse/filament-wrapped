@@ -5,9 +5,51 @@ import { FaRegClipboard } from "react-icons/fa6";
 import { IoCopyOutline } from "react-icons/io5";
 import { MdDownload } from "react-icons/md";
 
-export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
+export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadImage }) => {
+
+  const [mintedNft, setMintedNft] = useState("");
+  
+  const collectionId = process.env.REACT_APP_COLLECTION_ID;
+  const templateId = process.env.REACT_APP_TEMPLATE_ID;
+
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(null);
+
+    const getNFTMintedData = async () => { 
+      const apiKey = process.env.REACT_APP_CROSSMINT_API_KEY;
+
+    if (!apiKey) { 
+        throw new Error("API key is missing");
+    }
+    
+    const url = `/collections/${collectionId}/templates/${templateId}`;
+
+    const options = {
+        method: "GET",
+        headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+            "x-api-key": apiKey,
+        }
+      };
+      
+        try {
+          const response = await fetch(url, options);
+          const data = await response.json();
+          console.log("dataaaaa", data);
+         
+          
+          setMintedNft(data?.supply?.minted);
+
+        } catch (err) {
+          console.error("Error:", err);
+          throw err; 
+        }  
+  }
+
+  useEffect(() => {
+    getNFTMintedData()
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -68,8 +110,10 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
 
   const currentCard = badges[currentCardIndex];
 
+
+
   return (
-    <div className="flex flex-col items-center justify-center  text-white shadow-white">
+    <div className="flex flex-col z-40 items-center justify-center  text-white shadow-white">
       <div
         className="w-full max-w-[400px] flex flex-col relative"
         onTouchStart={handleTouchStart}
@@ -77,14 +121,19 @@ export const CardStepper = ({ badges, handleCopyImage, downloadImage }) => {
         onTouchEnd={handleTouchEnd}
       >
         {/* Progress Bar */}
-        <div className="w-full h-2 bg-gray-600 mt-2 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-white rounded-full transition-all duration-300"
-            style={{
-              width: `${((currentCardIndex + 1) / badges.length) * 100}%`,
-            }}
-          ></div>
+        <div className="mt-[40px] flex gap-6">
+          <span>{((Number(mintedNft)) / 500) * 100}%</span>
+          <div className="w-full h-2 bg-white bg-opacity-[10%] mt-2 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[#37F8FF] rounded-full transition-all duration-300"
+              style={{
+                width: `${((Number(mintedNft)) / 500) * 100}%`,
+              }}
+            ></div>
+          </div>
+          <span>{`${mintedNft}/500`}</span>
         </div>
+
 
         {/* Card Content */}
         <div className="flex-grow flex items-center justify-center relative mt-4">

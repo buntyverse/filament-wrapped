@@ -13,8 +13,7 @@ function App() {
 
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
-  // const addressToPass = connectedWalletAddress || walletAddress;
-  const addressToPass = "0x20c2d95a3dfdca9e9ad12794d5fa6fad99da44f5";
+  const addressToPass = connectedWalletAddress || walletAddress;
 
   const fetchData = () => {
     setIsDashboardVisible(true);
