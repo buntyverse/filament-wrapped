@@ -10,7 +10,7 @@ const mintNFT = async(address) => {
         throw new Error("API key is missing");
     }
     
-    const url = `/collections/b2f34c67-c1b4-4d15-b9f0-db736b7bf36e
+    const url = `https://www.crossmint.com/api/2022-06-09/collections/b2f34c67-c1b4-4d15-b9f0-db736b7bf36e
 /nfts`;
 
     const options = {
