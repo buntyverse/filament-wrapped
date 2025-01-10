@@ -10,7 +10,8 @@ const mintNFT = async(address) => {
         throw new Error("API key is missing");
     }
     
-    const url = `/collections/default-polygon/nfts`;
+    const url = `/collections/b2f34c67-c1b4-4d15-b9f0-db736b7bf36e
+/nfts`;
 
     const options = {
         method: "POST",
@@ -22,7 +23,7 @@ const mintNFT = async(address) => {
         body: JSON.stringify(
             {
       "templateId": process.env.REACT_APP_TEMPLATE_ID,
-      "recipient": `polygon:${address}`
+      "recipient": `base:${address}`
     }
         ),
     };
