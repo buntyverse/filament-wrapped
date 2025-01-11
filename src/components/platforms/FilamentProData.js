@@ -58,7 +58,7 @@ const FilamentProData = ({ walletAddress, setFilamentProData}) => {
           <div className="cardMoprh px-[29px] py-[33px] w-full flex flex-col gap-6">
             <img
               className="w-auto h-[31px]"
-              src="/hyperliquid.svg"
+              src="/filament.svg"
               alt="Asset"
             />
             <p className="text-center sm:text-sm">No Data Found</p>
