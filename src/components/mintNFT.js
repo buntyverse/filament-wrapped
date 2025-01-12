@@ -12,7 +12,7 @@ const mintNFT = async(address) => {
     const options = {
         method: "POST",
         headers: {
-            "x-client-api-key": process.env.GENESIS_API_KEY,
+            "x-client-api-key": 9829922288,
         },
     };
     
