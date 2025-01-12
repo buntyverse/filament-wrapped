@@ -5,9 +5,7 @@
 const mintNFT = async(address) => {
 
 
-    if (!apiKey) { 
-        throw new Error("API key is missing");
-    }
+    
     
     const url = `https://web-production-a568b.up.railway.app/mint/${address}`;
 
@@ -21,7 +19,7 @@ const mintNFT = async(address) => {
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
+    console.log(data)
     return data; 
   } catch (err) {
     console.error("Error:", err);
