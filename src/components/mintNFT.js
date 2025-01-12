@@ -12,14 +12,14 @@ const mintNFT = async(address) => {
     const options = {
         method: "POST",
         headers: {
-            "x-client-api-key": 9829922288,
+            "x-client-api-key": process.env.REACT_APP_GENESIS_API_KEY,
         },
     };
     
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data)
+    console.log(process.env.GENESIS_API_KEY)
     return data; 
   } catch (err) {
     console.error("Error:", err);
