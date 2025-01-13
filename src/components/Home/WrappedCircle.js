@@ -72,8 +72,8 @@ const WrappedCircle = ({ walletAddress, setWalletAddress, fetchData }) => {
               {(() => {
                 if (!connected) {
                   return (
-                    <button className="connect-btn mt-[144px] press-start-2p-regular text-black text-[1.3em]" onClick={openConnectModal} type="button">
-                      Connect Wallet
+                    <button className="connect-btn mt-[144px] !px-[100px] press-start-2p-regular text-black text-[1.3em]" onClick={openConnectModal} type="button">
+                      Start
                     </button>
                   );
                 }

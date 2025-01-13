@@ -8,8 +8,10 @@
 /* General Styling */
 .dashboard-container {
   position: relative;
-  padding: 0 1rem;
-  max-width: 100%;
+  margin: 0 !important;
+  padding: 0;
+  box-sizing: border-box;
+    flex: 1 1 auto;
 }
 
 /* Back Button */
@@ -38,7 +40,7 @@
 
 /* Main Content Styling */
 .data-container {
-  height: 80vh;
+  height: 100vh;
 }
 
 .data-section,
@@ -98,16 +100,6 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .data-container {
-    width: 90vw;
-    margin: 0 auto;
-  }
-
-  .next-button {
-    font-size: 1.25rem;
-  }
-}
 
 @media (min-width: 1024px) {
   /* .data-container {

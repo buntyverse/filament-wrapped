@@ -4,9 +4,6 @@
 
 const mintNFT = async(address) => {
 
-
-    
-    
     const url = `https://web-production-a568b.up.railway.app/mint/${address}`;
 
     const options = {

@@ -16,20 +16,18 @@ export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadIm
   const [touchStartX, setTouchStartX] = useState(null);
 
     const getNFTMintedData = async () => { 
-      const apiKey = process.env.REACT_APP_CROSSMINT_API_KEY;
+      const apiKey = process.env.REACT_APP_GENESIS_API_KEY;
 
     if (!apiKey) { 
         throw new Error("API key is missing");
     }
     
-    const url = `/collections/${collectionId}/templates/${templateId}`;
+    const url = `https://web-production-a568b.up.railway.app/bar/`;
 
     const options = {
         method: "GET",
         headers: {
-            accept: "application/json",
-            "content-type": "application/json",
-            "x-api-key": apiKey,
+            "x-client-api-key": apiKey,
         }
       };
       
@@ -121,8 +119,11 @@ export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadIm
         onTouchEnd={handleTouchEnd}
       >
         {/* Progress Bar */}
-        <div className="mt-[40px] flex gap-6">
-          <span>{((Number(mintedNft)) / 500) * 100}%</span>
+        <div className="mt-[24px] flex flex-col gap-2">
+          <div className="flex w-full justify-between text-[32px]">
+            <span>{((Number(mintedNft)) / 500) * 100}%</span>
+            <span>{`${mintedNft}/500`}</span>
+          </div>
           <div className="w-full h-2 bg-white bg-opacity-[10%] mt-2 rounded-full overflow-hidden">
             <div
               className="h-full bg-[#37F8FF] rounded-full transition-all duration-300"
@@ -131,50 +132,18 @@ export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadIm
               }}
             ></div>
           </div>
-          <span>{`${mintedNft}/500`}</span>
+          
         </div>
 
 
         {/* Card Content */}
         <div className="flex-grow flex items-center justify-center relative mt-4">
-          <div className="p-4  rounded-lg w-full max-w-[95%] md:max-w-[400px]">
+          <div className="rounded-lg w-full max-w-[95%] md:max-w-[400px]">
             {currentCard.imageUrl && (
               <div className=" rounded-[19px]">
-              <video  autoPlay
-                  loop
-                  controlsList="nodownload nofullscreen noplaybackrate"
-                  disablePictureInPicture
-                  muted
-                  className=" pointer-events-none object-cover rounded-[19px] w-full h-full"
-                  playsInline
-                  width="600" controls>
-                <source src="genesis-vid.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                <img src="/genesis.gif"></img>
               </div>
             )}
-
-            {/* Button container */}
-            {/* <div className="flex space-x-4 justify-start mt-3">
-              <button
-                className="text-white hover:text-emerald-400 transition"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  handleCopyImage(currentCard.imageUrl);
-                }}
-              >
-                <IoCopyOutline size={22} />
-              </button>
-              <button
-                className="text-white hover:text-emerald-400 transition"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  downloadImage(currentCard.imageUrl, currentCard.name);
-                }}
-              >
-                <MdDownload size={24} />
-              </button>
-            </div> */}
           </div>
         </div>
       </div>

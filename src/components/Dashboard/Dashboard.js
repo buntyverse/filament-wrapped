@@ -50,7 +50,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   console.log("Data is available");
   setIsAnyDataAvailable(false);
-}, [hyperliquidData, vertexData, dydxData, filamentProdata]);
+}, [hyperliquidData, vertexData, dydxData, filamentProdata, walletAddress]);
 
   const [summaryData, setSummaryData] = useState({
     totalVolume: 0,
@@ -126,7 +126,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   }
 
   return (
-    <div className="dashboard-container z-50">
+    <div className="dashboard-container flex flex-col justify-between items-center z-50 w-full h-full">
        {showToast && <MintedToast />}
 
 
@@ -135,9 +135,9 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
        } */}
 
       {/* Main Content */}
-      <div className="data-container flex flex-col justify-between">
+      <div className={`data-container flex flex-col !h-full w-full ${showNewComponent ? "justify-center" : "justify-between pb-[40px]"} items-center`}>
         {!showNewComponent ? (
-          <div>
+          <div className="screen-1 pt-[40px]">
                 <ConnectButton.Custom>
       {({
         account,
@@ -245,7 +245,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
           </div>
        
         ) : (
-          <div className="badge-section flex flex-col justify-between px-[103px]">
+          <div className="badge-section w-full flex flex-col justify-between px-[103px]">
             <BadgeCard
               walletAddress={walletAddress}
               summaryData={summaryData}
