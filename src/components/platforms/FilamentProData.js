@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import DataCard from '../Cards/DataCard';
 
-const FilamentProData = ({ walletAddress, setFilamentProData}) => {
+const FilamentProData = ({ walletAddress, setComponentData}) => {
 
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
@@ -29,7 +29,7 @@ const FilamentProData = ({ walletAddress, setFilamentProData}) => {
         
             const myData = resp.records.filter((record) => record.fields["Account"] === walletAddress.toLowerCase())
             setData(myData[0].fields)
-            setFilamentProData(myData[0].fields)
+            setComponentData(myData[0].fields)
 
         } catch (e) {
             console.log("Error", e)
@@ -51,7 +51,7 @@ const FilamentProData = ({ walletAddress, setFilamentProData}) => {
           pnl={data?.netPnL}
           totalVolume={data.Volume}
           tradedAssets={data.tradedAssets ? data.tradedAssets : []}
-          imgSrc=""
+          imgSrc="/filament.svg"
         />
       ) : (
 

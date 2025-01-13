@@ -14,6 +14,7 @@ function App() {
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
   const addressToPass = connectedWalletAddress || walletAddress;
+  // FilamentAddress = '0x73E3875C19aA23ac3f4F8F3d1299AaCF2493E2d8';
 
   const fetchData = () => {
     setIsDashboardVisible(true);

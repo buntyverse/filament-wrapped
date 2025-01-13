@@ -32,7 +32,9 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   console.log(dydxData);
   console.groupEnd();
 
- useEffect(() => {
+  useEffect(() => {
+   
+    console.log("filamentProdata", filamentProdata);
   if (
     (hyperliquidData && hyperliquidData.totalVolume > 0) ||
     (vertexData && vertexData.totalVolume > 0) ||
@@ -227,7 +229,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                     <CardComponent
                       walletAddress={walletAddress}
                       updateTotals={updateTotals}
-                      setHyperliquidData={card.setData}
+                      setComponentData={card.setData}
                     />
                   </div>
                 )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DataCard from "../Cards/DataCard";
 
-const DYDXData = ({ walletAddress, updateTotals, setDydxData }) => {
+const DYDXData = ({ walletAddress, updateTotals, setComponentData }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -69,7 +69,7 @@ const DYDXData = ({ walletAddress, updateTotals, setDydxData }) => {
         totalPnL,
         tradedAssets: Array.from(tradedAssets),
       });
-      setDydxData({ totalVolume, totalPnL });
+      setComponentData({ totalVolume, totalPnL });
     } catch (error) {
       console.error("Error fetching DYDX data:", error.message);
     } finally {

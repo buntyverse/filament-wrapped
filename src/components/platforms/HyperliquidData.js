@@ -3,7 +3,7 @@ import axios from "axios";
 import DataCard from "../Cards/DataCard";
 import { coinList } from "../assets/list";
 
-const HyperliquidData = ({ walletAddress, updateTotals, setHyperliquidData }) => {
+const HyperliquidData = ({ walletAddress, updateTotals, setComponentData }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -85,7 +85,7 @@ const HyperliquidData = ({ walletAddress, updateTotals, setHyperliquidData }) =>
           tradedAssets: Array.from(tradedAssets),
         });
         
-        setHyperliquidData({
+        setComponentData({
           totalVolume,
           netPnL,
           tradedAssets: Array.from(tradedAssets),
