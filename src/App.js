@@ -45,6 +45,12 @@ function App() {
             handleBackButtonClick={handleBackButtonClick}
           />
       </section>
+
+      {/* mobile view warning */}
+
+      <div className=" flex sm:hidden z-[999] h-lvh w-lvw justify-center items-center fixed bottom-0 left-0 right-0 bg-black bg-opacity-90 text-white text-center py-2">
+        Use desktop device for better experience.
+      </div>
     </div>
   );
 }
