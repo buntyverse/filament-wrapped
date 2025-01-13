@@ -4,33 +4,22 @@
 
 const mintNFT = async(address) => {
 
-    const apiKey = process.env.REACT_APP_CROSSMINT_API_KEY;
 
-    if (!apiKey) { 
-        throw new Error("API key is missing");
-    }
     
-    const url = `/collections/default-polygon/nfts`;
+    
+    const url = `https://web-production-a568b.up.railway.app/mint/${address}`;
 
     const options = {
         method: "POST",
         headers: {
-            accept: "application/json",
-            "content-type": "application/json",
-            "x-api-key": apiKey,
+            "x-client-api-key": process.env.REACT_APP_GENESIS_API_KEY,
         },
-        body: JSON.stringify(
-            {
-      "templateId": process.env.REACT_APP_TEMPLATE_ID,
-      "recipient": `polygon:${address}`
-    }
-        ),
     };
     
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
+    console.log(process.env.GENESIS_API_KEY)
     return data; 
   } catch (err) {
     console.error("Error:", err);
