@@ -28,6 +28,13 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   const [mintingNft, setMintingNft] = useState(false);
 
+  const [isAlreadyMinted, setIsAlreadyMinted] = useState(false);
+
+  useEffect(() => {
+  const minted = localStorage.getItem("nftMinted");
+  setIsAlreadyMinted(minted === "true");
+}, []);
+
   console.group("Data");
   console.log("hyperliquidData", hyperliquidData);
   console.log("vertexData", vertexData);
@@ -110,7 +117,9 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
         const res = await mintNFT(walletAddress)
         console.log("resp", res?.onChain?.status)
 
-         if (res?.onChain?.status === "pending") {
+        if (res?.onChain?.status === "pending") {
+          localStorage.setItem("nftMinted", "true");
+            setIsAlreadyMinted(true); 
            setShowToast(true); 
            
           setTimeout(() => {
@@ -251,8 +260,8 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               summaryData={summaryData}
               handleBackClick={handleBackClick}
               />
-              <div className="flex justify-center gap-6">
-               
+              {!isAlreadyMinted &&
+                <div className="flex justify-center gap-6">
                <button className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]" onClick={handleBackClick}>
                       <p>Back</p>
                 </button>
@@ -264,7 +273,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                     {mintingNft ? "Minting..." :  "Mint Now"}
                   </span>
         </button>
-              </div>
+              </div>}
               
           </div>
         )}
