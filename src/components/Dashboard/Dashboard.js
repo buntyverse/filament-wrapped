@@ -26,15 +26,18 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [dataCards, setDataCards] = useState([]);
   const [isAnyDataAvailable, setIsAnyDataAvailable] = useState(false);
 
+  const [mintingNft, setMintingNft] = useState(false);
+
   console.group("Data");
-  console.log(hyperliquidData);
-  console.log(vertexData);
-  console.log(dydxData);
+  console.log("hyperliquidData", hyperliquidData);
+  console.log("vertexData", vertexData);
+  console.log("dydxData", dydxData);
+    console.log("filamentProdata", filamentProdata);
+
   console.groupEnd();
 
   useEffect(() => {
    
-    console.log("filamentProdata", filamentProdata);
   if (
     (hyperliquidData && hyperliquidData.totalVolume > 0) ||
     (vertexData && vertexData.totalVolume > 0) ||
@@ -103,6 +106,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
     const handleNFT = async() => {
       try {
+        setMintingNft(true);
         const res = await mintNFT(walletAddress)
         console.log("resp", res?.onChain?.status)
 
@@ -116,6 +120,8 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
         
       } catch (e) {
         console.error("Error minting NFT:", e);
+      } finally {
+        setMintingNft(false);
       }
   }
 
@@ -247,25 +253,29 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               />
               <div className="flex justify-center gap-6">
                
-               <button className="back-btn press-start-2p-regular text-white text-[32px]" onClick={handleBackClick}>
+               <button className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]" onClick={handleBackClick}>
                       <p>Back</p>
                 </button>
                   <button
-          className="connect-btn press-start-2p-regular text-[32px] flex-1"
+          className={`${mintingNft ? "minting-btn" : "connect-btn"} press-start-2p-regular h-fit max-w-[396px] text-[1.3em] flex-1`}
           onClick={handleNFT}
-        >
-          Mint NFT
+                >
+                  <span className="text-black">
+                    {mintingNft ? "Minting..." :  "Mint Now"}
+                  </span>
         </button>
               </div>
               
           </div>
         )}
   
-  {!showNewComponent && isAnyDataAvailable ? (
-    <button className="text-black press-start-2p-regular text-[32px] connect-btn" onClick={handleNextClick}>
-      Mint Genesis NFT
-      <FaAngleRight size={24} />
-    </button>
+        {!showNewComponent && isAnyDataAvailable ? (
+          <div className="w-full flex justify-center items-center">
+            <button className="text-black press-start-2p-regular text-[1.3em] connect-btn w-fit" onClick={handleNextClick}>
+                Mint Genesis
+              </button>
+          </div>
+ 
   ) : !isAnyDataAvailable ? (
               <div className="text-white border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
                 <img src="/warning.svg" className="w-[31px] h-[31px]" />
