@@ -14,7 +14,7 @@ const FilamentProData = ({ walletAddress, setComponentData}) => {
         try {
             setLoading(true)
 
-            const url = `https://api.airtable.com/v0/${airtableBase}/Account%20Trade%20Volumes?maxRecords=60&view=Grid%20view`
+            const url = `https://api.airtable.com/v0/${airtableBase}/Account%20Trade%20Volumes`
             const options = {
                 method: "GET",
                 headers: {
