@@ -317,7 +317,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                   <div className="flex justify-center items-center">
                          <div className="text-white max-w-fit border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
                           <img src="/warning.svg" className="w-[31px] h-[31px]" />
-                          Phase 1 NFT Minted
+                          Phase 1 Minted Out
                         </div>
                   </div>
              
