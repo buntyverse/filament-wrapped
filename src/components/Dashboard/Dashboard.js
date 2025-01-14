@@ -30,6 +30,8 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   const [isAlreadyMinted, setIsAlreadyMinted] = useState(false);
 
+  const [mintedNft, setMintedNft] = useState("");
+  
   useEffect(() => {
   const minted = localStorage.getItem("nftMinted");
   setIsAlreadyMinted(minted === "true");
@@ -133,6 +135,42 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
         setMintingNft(false);
       }
   }
+
+  const getNFTMintedData = async () => { 
+      const apiKey = process.env.REACT_APP_GENESIS_API_KEY;
+
+    if (!apiKey) { 
+        throw new Error("API key is missing");
+    }
+    
+    const url = `https://web-production-a568b.up.railway.app/bar/`;
+
+    const options = {
+        method: "GET",
+        headers: {
+            "x-client-api-key": apiKey,
+        }
+      };
+      
+    try {
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log("dataaaaa", data);
+    
+      
+      setMintedNft(data?.supply?.minted);
+
+    } catch (err) {
+      console.error("Error:", err);
+      throw err; 
+    }  
+  }
+
+  useEffect(() => {
+    getNFTMintedData();
+  }, [])
+
+  console.log("Number(mintedNft) < 389", Number(mintedNft), Number(mintedNft) < 500)
 
   return (
     <div className="dashboard-container flex flex-col justify-between items-center z-50 w-full h-full">
@@ -260,7 +298,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               summaryData={summaryData}
               handleBackClick={handleBackClick}
               />
-              {!isAlreadyMinted &&
+              {!isAlreadyMinted && Number(mintedNft) < 500 ?
                 <div className="flex justify-center gap-6">
                <button className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]" onClick={handleBackClick}>
                       <p>Back</p>
@@ -273,7 +311,18 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                     {mintingNft ? "Minting..." :  "Mint Now"}
                   </span>
         </button>
-              </div>}
+                </div>
+                :
+                (
+                  <div className="flex justify-center items-center">
+                         <div className="text-white max-w-fit border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
+                          <img src="/warning.svg" className="w-[31px] h-[31px]" />
+                          Phase 1 NFT Minted
+                        </div>
+                  </div>
+             
+                )
+              }
               
           </div>
         )}
