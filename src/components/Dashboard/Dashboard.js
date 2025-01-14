@@ -298,7 +298,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               summaryData={summaryData}
               handleBackClick={handleBackClick}
               />
-              {!isAlreadyMinted &&
+              {/* {!isAlreadyMinted &&
                 <div className="flex justify-center gap-6">
                <button className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]" onClick={handleBackClick}>
                       <p>Back</p>
@@ -312,7 +312,13 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                   </span>
         </button>
                 </div>
-              }
+              } */}
+                 <div className="flex justify-center items-center">
+                         <div className="text-white max-w-fit border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
+                          <img src="/warning.svg" className="w-[31px] h-[31px]" />
+                          Phase 1 Minted Out
+                        </div>
+                  </div>
               
           </div>
         )}
