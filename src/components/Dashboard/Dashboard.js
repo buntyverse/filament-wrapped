@@ -332,7 +332,7 @@ Mint yours here: genesis.filament.finance`;
               summaryData={summaryData}
               handleBackClick={handleBackClick}
               />
-              {isAlreadyMinted && mintedNft < 1000 &&
+              {!isAlreadyMinted && mintedNft < 1000 &&
                 <div className="flex justify-center gap-6">
                <button className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]" onClick={handleBackClick}>
                       <p>Back</p>
@@ -348,7 +348,7 @@ Mint yours here: genesis.filament.finance`;
                 </div>
               }
 
-              {!isAlreadyMinted && mintedNft < 1000 &&
+              {isAlreadyMinted && mintedNft < 1000 &&
                 <div className="flex justify-center gap-6" onClick={shareOnTwitter}>
                   <button className="connect-btn whitespace-nowrap press-start-2p-regular h-fit max-w-fit text-[1.3em] flex-1">Share on X</button>
                 </div>

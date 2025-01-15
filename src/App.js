@@ -15,7 +15,6 @@ function App() {
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
  const addressToPass = connectedWalletAddress || walletAddress;
-
   // const addressToPass = '0xa384da4a4d7764a0653e63b2d8956b28bbf8d00';
   // FilamentAddress = '0x73E3875C19aA23ac3f4F8F3d1299AaCF2493E2d8';
 
