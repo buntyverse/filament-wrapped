@@ -141,3 +141,11 @@ border: 1px solid rgba(156, 163, 175, 0.10);
 background: rgba(0, 0, 0, 0.50);
 backdrop-filter: blur(2px);
 }
+
+.connectx-btn{
+  border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    background: rgba(255, 255, 255, 0.10);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+}

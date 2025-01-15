@@ -43,7 +43,7 @@ const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc, flpAmount =
           />
     
         <div className="w-full h-full flex justify-center ">
-          <p className="text-center text-gray-200 sm:text-sm ">No Data Found</p>
+          <p className="text-center text-[#595D74] sm:text-sm press-start-2p-regular whitespace-nowrap">No Data Found</p>
         </div>
       </div>
     );

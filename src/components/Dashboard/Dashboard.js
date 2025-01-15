@@ -13,7 +13,9 @@ import MintedToast from "../Cards/MintedToast";
 import TwitterAuth from "./TwitterAuth";
 import { useAtom } from "jotai";
 import { flpAmt } from "../config/atoms";
-
+import userData from '../assets/converted_file_new.json';
+import { FaXTwitter } from "react-icons/fa6";
+import KaitoCard from "../platforms/KaitoCard";
 
 const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
@@ -26,6 +28,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [dydxData, setDydxData] = useState(null);
   const [filamentProdata, setFilamentProData] = useState(null);
   const [flpAmount, setFlpAmount] = useAtom(flpAmt);
+  const [twitterUserName, setTwitterUserName] = useState("");
 
   const [dataCards, setDataCards] = useState([]);
   const [isAnyDataAvailable, setIsAnyDataAvailable] = useState(false);
@@ -45,18 +48,23 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   console.log("hyperliquidData", hyperliquidData);
   console.log("vertexData", vertexData);
   console.log("dydxData", dydxData);
-    console.log("filamentProdata", filamentProdata);
+  console.log("filamentProdata", filamentProdata);
 
   console.groupEnd();
 
   useEffect(() => {
    
+    const isTwitterUserInList = userData.some(
+      (user) => user.username === twitterUserName
+    );
+    
   if (
     (hyperliquidData && hyperliquidData.totalVolume > 0) ||
     (vertexData && vertexData.totalVolume > 0) ||
     (dydxData && dydxData.totalVolume > 0) || 
     (filamentProdata && filamentProdata.Volume > 0) ||
-    flpAmount > 0
+    flpAmount > 0 ||
+    isTwitterUserInList
   ) {
     setIsAnyDataAvailable(true);
     return;
@@ -64,7 +72,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   console.log("Data is available");
   setIsAnyDataAvailable(false);
-}, [hyperliquidData, vertexData, dydxData, filamentProdata, walletAddress, flpAmount]);
+}, [hyperliquidData, vertexData, dydxData, filamentProdata, walletAddress, flpAmount, twitterUserName]);
 
   const [summaryData, setSummaryData] = useState({
     totalVolume: 0,
@@ -177,6 +185,18 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   console.log("Number(mintedNft) < 389", Number(mintedNft), Number(mintedNft) < 500)
 
+  const twitterText = 'Happy birthday from 69 others genesis.filament.finance'
+  
+  const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}`;
+
+  const shareOnTwitter = async () => {
+    try {
+      window.open(tweetUrl, "_blank");
+    } catch (error) {
+      console.error("Error sharing on Twitter:", error);
+    }
+  };
+
   return (
     <div className="dashboard-container flex flex-col justify-between items-center z-50 w-full h-full">
        {showToast && <MintedToast />}
@@ -191,109 +211,114 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
         {!showNewComponent ? (
           <div className="screen-1 pt-[40px]">
                 <ConnectButton.Custom>
-      {({
-        account,
-        chain,
-        openAccountModal,
-        openChainModal,
-        openConnectModal,
-        authenticationStatus,
-        mounted,
-      }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
-        const connected =
-          ready &&
-          account &&
-          chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+                  {({
+                    account,
+                    chain,
+                    openAccountModal,
+                    openChainModal,
+                    openConnectModal,
+                    authenticationStatus,
+                    mounted,
+                  }) => {
+                    // Note: If your app doesn't use authentication, you
+                    // can remove all 'authenticationStatus' checks
+                    const ready = mounted && authenticationStatus !== 'loading';
+                    const connected =
+                      ready &&
+                      account &&
+                      chain &&
+                      (!authenticationStatus ||
+                        authenticationStatus === 'authenticated');
 
-        return (
-          <div
-            {...(!ready && {
-              'aria-hidden': true,
-              'style': {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button className="connect-button" onClick={openConnectModal} type="button">
-                    Connect Wallet
-                  </button>
-                );
-              }
-
-              if (chain.unsupported) {
-                return (
-                  <button onClick={openChainModal} type="button">
-                    Wrong network
-                  </button>
-                );
-              }
-
-              return (
-                <div style={{ display: 'flex', gap: 12 }} className=" justify-end">
-                  {/* <button
-                    onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
-                    type="button"
-                  >
-                    {chain.hasIcon && (
+                    return (
                       <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
+                        {...(!ready && {
+                          'aria-hidden': true,
+                          'style': {
+                            opacity: 0,
+                            pointerEvents: 'none',
+                            userSelect: 'none',
+                          },
+                        })}
                       >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button> */}
+                        {(() => {
+                          if (!connected) {
+                            return (
+                              <button className="connect-button" onClick={openConnectModal} type="button">
+                                Connect Wallet
+                              </button>
+                            );
+                          }
 
-                  <button onClick={openAccountModal} type="button" className="disconnect-btn press-start-2p-regular text-[16px]">
-                    {account.displayName}
-                  </button>
-                </div>
-              );
-            })()}
-          </div>
-        );
-      }}
-            </ConnectButton.Custom>
-               <div className="data-section flex-1 flex-wrap mt-6">
-            {dataCards.map((card, index) => {
-              const CardComponent = card.component;
-              return (
-                walletAddress && (
-                  <div key={index} className="data-card flex-1">
-                    <CardComponent
-                      walletAddress={walletAddress}
-                      updateTotals={updateTotals}
-                      setComponentData={card.setData}
-                    />
+                          if (chain.unsupported) {
+                            return (
+                              <button onClick={openChainModal} type="button">
+                                Wrong network
+                              </button>
+                            );
+                          }
+
+                          return (
+              
+                                <div style={{ display: 'flex', gap: 12 }} className=" justify-end">
+                                  {/* <button
+                                    onClick={openChainModal}
+                                    style={{ display: 'flex', alignItems: 'center' }}
+                                    type="button"
+                                  >
+                                    {chain.hasIcon && (
+                                      <div
+                                        style={{
+                                          background: chain.iconBackground,
+                                          width: 12,
+                                          height: 12,
+                                          borderRadius: 999,
+                                          overflow: 'hidden',
+                                          marginRight: 4,
+                                        }}
+                                      >
+                                        {chain.iconUrl && (
+                                          <img
+                                            alt={chain.name ?? 'Chain icon'}
+                                            src={chain.iconUrl}
+                                            style={{ width: 12, height: 12 }}
+                                          />
+                                        )}
+                                      </div>
+                                    )}
+                                    {chain.name}
+                                  </button> */}
+                                  <TwitterAuth setTwitterUserName={setTwitterUserName} />
+                                  <button onClick={openAccountModal} type="button" className="disconnect-btn press-start-2p-regular text-[16px]">
+                                    {account.displayName}
+                                  </button>
+                                </div>
+                                
+                          );
+                        })()}
+                      </div>
+                    );
+                  }}
+                </ConnectButton.Custom>
+                <div className="data-section flex-1 flex-wrap mt-6">
+                  {dataCards.map((card, index) => {
+                    const CardComponent = card.component;
+                    return (
+                      walletAddress && (
+                        <div key={index} className="data-card flex-1">
+                          <CardComponent
+                            walletAddress={walletAddress}
+                            updateTotals={updateTotals}
+                            setComponentData={card.setData}
+                          />
+                        </div>
+                      )
+                    )
+                  })}
+                  <div>
+                    <KaitoCard/>
                   </div>
-                )
-              );
-            })}
-          </div>
+                </div>
           </div>
        
         ) : (
@@ -303,7 +328,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               summaryData={summaryData}
               handleBackClick={handleBackClick}
               />
-              {/* {!isAlreadyMinted &&
+              {isAlreadyMinted && mintedNft < 1000 &&
                 <div className="flex justify-center gap-6">
                <button className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]" onClick={handleBackClick}>
                       <p>Back</p>
@@ -317,22 +342,23 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
                   </span>
         </button>
                 </div>
-              } */}
-                 <div className="flex justify-center items-center">
+              }
+
+              {!isAlreadyMinted && mintedNft < 1000 &&
+                <div className="flex justify-center gap-6" onClick={shareOnTwitter}>
+                  <button className="connect-btn whitespace-nowrap press-start-2p-regular h-fit max-w-fit text-[1.3em] flex-1">Share on X</button>
+                </div>
+              }
+
+            {mintedNft >= 1000 && <div className="flex justify-center items-center">
                          <div className="text-white max-w-fit border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
                           <img src="/warning.svg" className="w-[31px] h-[31px]" />
-                          Phase 1 Minted Out
+                          Phase 2 Minted Out
                         </div>
-                  </div>
+                  </div>}
               
           </div>
         )}
-
-        {!isAnyDataAvailable &&
-          <div>
-            <TwitterAuth/>
-          </div>
-        }
   
         {!showNewComponent && isAnyDataAvailable ? (
           <div className="w-full flex justify-center items-center">
@@ -341,12 +367,12 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               </button>
           </div>
  
-  ) : !isAnyDataAvailable ? (
-              <div className="text-white border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
-                <img src="/warning.svg" className="w-[31px] h-[31px]" />
-                Not Eligible to mint: Must Have Activity on any of the listed Dapps
-              </div>
-  ) : null}
+          ) : !isAnyDataAvailable ? (
+                      <div className="text-white border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
+                        <img src="/warning.svg" className="w-[31px] h-[31px]" />
+                        Not Eligible to mint: Must Have Activity on any of the listed Dapps
+                      </div>
+          ) : null}
       </div>
     </div>
   );

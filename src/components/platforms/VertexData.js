@@ -109,7 +109,7 @@ const VertexData = ({ walletAddress, updateTotals, setComponentData }) => {
               src="/vertex.svg"
               alt="Asset"
             />
-            <p className="text-center sm:text-sm">No Datas Found</p>
+            <p className="text-center text-[#595D74] sm:text-sm press-start-2p-regular whitespace-nowrap">No Data Found</p>
           </div>
 
       )}

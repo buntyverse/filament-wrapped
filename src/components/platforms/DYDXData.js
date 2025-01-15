@@ -111,7 +111,7 @@ const DYDXData = ({ walletAddress, updateTotals, setComponentData }) => {
               src="/dyx.svg"
               alt="Asset"
             />
-            <p className="text-center sm:text-sm">No Data Found</p>
+            <p className="text-center text-[#595D74] sm:text-sm press-start-2p-regular whitespace-nowrap">No Data Found</p>
           </div>
       
       )}

@@ -221,7 +221,7 @@ const BadgeCard = ({ walletAddress, summaryData, handleBackClick }) => {
           onClick={handleNFT}
         >
           Mint NFT
-        </button>
+        </button> 
       </div> */}
 
       {copied && (

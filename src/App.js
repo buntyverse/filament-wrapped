@@ -14,9 +14,9 @@ function App() {
 
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
-  // const addressToPass = connectedWalletAddress || walletAddress;
+ const addressToPass = connectedWalletAddress || walletAddress;
 
-  const addressToPass = '0xa384da4a4d7764a0653e63b2d8956b28bbf8d009';
+  // const addressToPass = '0xa384da4a4d7764a0653e63b2d8956b28bbf8d00';
   // FilamentAddress = '0x73E3875C19aA23ac3f4F8F3d1299AaCF2493E2d8';
 
   const fetchData = () => {
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="text-white flex flex-col justify-start items-start">
-      <ScrollControl isConnected={true} />
+      <ScrollControl isConnected={isConnected} />
       <section className="section h-lvh w-lvw relative section1" id="section1">
         <img src="/spage-bg.webp" className="absolute object-cover bottom-0 w-lvw z-10" />
            <WrappedCircle
