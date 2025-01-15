@@ -185,7 +185,11 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   console.log("Number(mintedNft) < 389", Number(mintedNft), Number(mintedNft) < 500)
 
-  const twitterText = 'Happy birthday from 69 others genesis.filament.finance'
+  const twitterText = `Just minted my Filament Genesis NFT 
+
+                      If you've ever been a perps trader, or a kaito yapper
+
+                      Mint yours here: genesis.filament.finance`;
   
   const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}`;
 
