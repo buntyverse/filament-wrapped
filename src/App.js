@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 import './App.css';
 import ScrollControl from "./components/Home/ScrollControl";
 
+
 function App() {
   
   const [walletAddress, setWalletAddress] = useState("");
@@ -13,9 +14,9 @@ function App() {
 
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
-  const addressToPass = connectedWalletAddress || walletAddress;
+  // const addressToPass = connectedWalletAddress || walletAddress;
 
-  // const addressToPass = '0x62aD2918a18c062D6EDD00Ff2aB5aB4F54E9eB31';
+  const addressToPass = '0xa384da4a4d7764a0653e63b2d8956b28bbf8d009';
   // FilamentAddress = '0x73E3875C19aA23ac3f4F8F3d1299AaCF2493E2d8';
 
   const fetchData = () => {
@@ -27,10 +28,9 @@ function App() {
     setIsDashboardVisible(false);
   };
 
-
   return (
     <div className="text-white flex flex-col justify-start items-start">
-      <ScrollControl isConnected={isConnected} />
+      <ScrollControl isConnected={true} />
       <section className="section h-lvh w-lvw relative section1" id="section1">
         <img src="/spage-bg.webp" className="absolute object-cover bottom-0 w-lvw z-10" />
            <WrappedCircle

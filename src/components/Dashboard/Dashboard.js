@@ -10,9 +10,12 @@ import FilamentProData from "../platforms/FilamentProData";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import mintNFT from "../mintNFT";
 import MintedToast from "../Cards/MintedToast";
+import TwitterAuth from "./TwitterAuth";
+import { useAtom } from "jotai";
+import { flpAmt } from "../config/atoms";
+
 
 const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
-  
 
   const [showToast, setShowToast] = useState(false);
   
@@ -22,6 +25,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [vertexData, setVertexData] = useState(null);
   const [dydxData, setDydxData] = useState(null);
   const [filamentProdata, setFilamentProData] = useState(null);
+  const [flpAmount, setFlpAmount] = useAtom(flpAmt);
 
   const [dataCards, setDataCards] = useState([]);
   const [isAnyDataAvailable, setIsAnyDataAvailable] = useState(false);
@@ -51,7 +55,8 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
     (hyperliquidData && hyperliquidData.totalVolume > 0) ||
     (vertexData && vertexData.totalVolume > 0) ||
     (dydxData && dydxData.totalVolume > 0) || 
-    (filamentProdata && filamentProdata.Volume > 0)
+    (filamentProdata && filamentProdata.Volume > 0) ||
+    flpAmount > 0
   ) {
     setIsAnyDataAvailable(true);
     return;
@@ -59,7 +64,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   console.log("Data is available");
   setIsAnyDataAvailable(false);
-}, [hyperliquidData, vertexData, dydxData, filamentProdata, walletAddress]);
+}, [hyperliquidData, vertexData, dydxData, filamentProdata, walletAddress, flpAmount]);
 
   const [summaryData, setSummaryData] = useState({
     totalVolume: 0,
@@ -322,6 +327,12 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
               
           </div>
         )}
+
+        {!isAnyDataAvailable &&
+          <div>
+            <TwitterAuth/>
+          </div>
+        }
   
         {!showNewComponent && isAnyDataAvailable ? (
           <div className="w-full flex justify-center items-center">

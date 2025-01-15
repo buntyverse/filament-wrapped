@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc }) => {
+const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc, flpAmount = 0 }) => {
   const [tiltStyle, setTiltStyle] = useState({});
 
   const handleMouseMove = (e) => {
@@ -90,6 +90,17 @@ const DataCard = ({ loading, totalVolume, pnl, tradedAssets, imgSrc }) => {
               </span>
               <p className="text-[16px] text-white ">
                 {tradedAssets.join(", ")}
+              </p>
+            </div>
+            )}
+            
+             {flpAmount !== 0 && (
+            <div className="flex flex-col items-center">
+              <span className="text-[24px] text-[#595D74]">
+                FLP Amount
+              </span>
+              <p className="text-[16px] text-white press-start-2p-regular">
+                {flpAmount}
               </p>
             </div>
           )}
