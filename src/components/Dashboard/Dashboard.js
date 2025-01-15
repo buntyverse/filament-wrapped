@@ -374,7 +374,7 @@ Mint yours here: genesis.filament.finance`;
           ) : !isAnyDataAvailable ? (
                       <div className="text-white border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
                         <img src="/warning.svg" className="w-[31px] h-[31px]" />
-                        Not Eligible to mint: Must Have Activity on any of the listed Dapps
+                        Not ELIGIBLE TO MINT: MUST HAVE ACTIVITY ON ANY OF THE LISTED DAPPS
                       </div>
           ) : null}
       </div>
