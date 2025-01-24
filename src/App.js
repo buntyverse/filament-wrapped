@@ -8,15 +8,15 @@ import ScrollControl from "./components/Home/ScrollControl";
 
 
 function App() {
-  
+
   const [walletAddress, setWalletAddress] = useState("");
   const [isDashboardVisible, setIsDashboardVisible] = useState(false);
 
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
- const addressToPass = connectedWalletAddress || walletAddress;
-  // const addressToPass = '0xa384da4a4d7764a0653e63b2d8956b28bbf8d00';
-  // FilamentAddress = '0x73E3875C19aA23ac3f4F8F3d1299AaCF2493E2d8';
+  const addressToPass = connectedWalletAddress || walletAddress;
+  // const addressToPass = '0xb0f9f73a241f6a0d8551f21adcd1fb06080af4f2';
+
 
   const fetchData = () => {
     setIsDashboardVisible(true);
@@ -29,21 +29,21 @@ function App() {
 
   return (
     <div className="text-white flex flex-col justify-start items-start">
-      <ScrollControl isConnected={isConnected} />
+      <ScrollControl isConnected={true} />
       <section className="section h-lvh w-lvw relative section1" id="section1">
         <img src="/spage-bg.webp" className="absolute object-cover bottom-0 w-lvw z-10" />
-           <WrappedCircle
-            walletAddress={walletAddress}
-            setWalletAddress={setWalletAddress}
-            fetchData={fetchData}
-          />
+        <WrappedCircle
+          walletAddress={walletAddress}
+          setWalletAddress={setWalletAddress}
+          fetchData={fetchData}
+        />
       </section>
       <section className="section h-lvh relative w-lvw" id="section2">
         <img src="/grid-bg.svg" className="absolute object-cover top-0 w-lvw z-10" />
-          <Dashboard
-            walletAddress={addressToPass}
-            handleBackButtonClick={handleBackButtonClick}
-          />
+        <Dashboard
+          walletAddress={addressToPass}
+          handleBackButtonClick={handleBackButtonClick}
+        />
       </section>
 
       {/* mobile view warning */}

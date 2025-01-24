@@ -62,6 +62,13 @@ code {
   box-shadow: 0px 4px 7.1px 0px rgba(255, 255, 255, 0.10) inset, 0px -8px 0px 0px #3EA5A9 inset;
 }
 
+.connect-btn-disabled{
+  border-radius: 14px;
+    border: 3px solid rgba(255, 255, 255, 0.20);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), linear-gradient(0deg, #37F8FF 0%, #00A9AE 100%);
+    box-shadow: 0px 4px 9.7px 0px rgba(255, 255, 255, 0.10) inset, 0px -2px 0px 0px #3EA5A9 inset;
+}
+
 .connect-btn:hover {
 border-radius: 14px;
   border: 3px solid rgba(255, 255, 255, 0.20);

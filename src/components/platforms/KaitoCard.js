@@ -7,7 +7,7 @@ const KaitoCard = () => {
 
   return (
     <>
-          <div className="cardMoprh px-[29px] py-[33px] w-full flex flex-col gap-6">
+          <div className="cardMoprh px-[29px] py-[33px] h-[280px] w-[317px] flex flex-col justify-between">
             <img
               className="w-auto h-[31px]"
               src="/kaito.png"
