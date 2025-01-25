@@ -38,7 +38,6 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   const [addressToMintTo, setAddressToMintTo] = useState("");
 
-  const [isConnectedEthAddressInTheEligbleList, setIsConnectedEthAddressInTheEligibleList] = useState(false);
 
   useEffect(() => {
     const minted = localStorage.getItem("nftMinted");
@@ -46,14 +45,6 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   }, []);
 
   useEffect(() => {
-
-    const isEthAddressInTheList = eligibleEthAddresses.some(
-      (user) => user.walletAddress.toLowerCase() === walletAddress.toLowerCase()
-    )
-
-    if (isEthAddressInTheList) {
-      setIsConnectedEthAddressInTheEligibleList(true);
-    }
 
     const isTwitterUserInList = userData.some(
       (user) => user.username === twitterUserName
@@ -67,7 +58,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
       (user) => user.address.toLowerCase() === walletAddress.toLowerCase()
     );
 
-    if (isTwitterUserInList || isInBadKids || isInSloth || isEthAddressInTheList) {
+    if (isTwitterUserInList || isInBadKids || isInSloth) {
       setIsAnyDataAvailable(true);
       return;
     }
@@ -114,13 +105,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
     try {
       setMintingNft(true);
 
-      let res;
-
-      if (isConnectedEthAddressInTheEligbleList) {
-        res = await mintNFT(walletAddress);     // connected wallet Address
-      } else {
-        res = await mintNFT(addressToMintTo);    // entered wallet address
-      }
+      const res = await mintNFT(addressToMintTo);  //  address to mint to
 
       // will mint to entered address & not connected wallet address
       console.log("resp", res?.onChain?.status);
@@ -316,7 +301,7 @@ Mint yours here: genesis.filament.finance`;
             <div className="data-section flex-1 w-full flex-wrap mt-6">
               <BadKidsCard walletAddress={walletAddress} />
               <KaitoCard />
-              <Sloth />
+              <Sloth walletAddress={walletAddress} />
             </div>
           </div>
         ) : (
@@ -371,46 +356,37 @@ Mint yours here: genesis.filament.finance`;
         {!showNewComponent && isAnyDataAvailable ? (
           <div className="flex flex-col justify-center items-center gap-7">
 
-            {!isConnectedEthAddressInTheEligbleList && <div className="border w-[780px] border-white border-opacity-[20%] rounded-[6px] flex flex-col gap-4 bg-[#040E11] p-6">
-              <span className="text-[#9CA3AF] text-[24px]">Mint to:</span>
+            <div className="border w-[780px] border-white border-opacity-[20%] rounded-[6px] flex flex-col gap-2 bg-[#040E11] px-3 py-4">
+              <span className="text-[#9CA3AF] text-[20px]">Mint to:</span>
               <input
                 value={addressToMintTo}
                 onChange={(e) => setAddressToMintTo(e.target.value)}
                 placeholder="Enter an EVM Address"
-                className=" bg-black bg-opacity-[40%] rounded-[8px] border border-[#9CA3AF] border-opacity-[20%] focus:outline-none text-white placeholder:text-[#9CA3AF] text-[24px] px-3 py-6"
+                className=" bg-black h-12 bg-opacity-[40%] rounded-[8px] border border-[#9CA3AF] border-opacity-[20%] focus:outline-none text-white placeholder:text-[#9CA3AF] text-[16px] px-3 py-6"
               ></input>
-            </div>}
+            </div>
 
-            {isConnectedEthAddressInTheEligbleList ?
-              <div className="w-full flex justify-center items-center">
-                <button
-                  className={`text-black press-start-2p-regular text-[1.3em] connect-btn w-fit`}
-                  onClick={handleNextClick}
-                >
-                  Mint Genesis
-                </button>
-              </div>
-              :
-              <div className="w-full flex justify-center items-center">
-                <button
-                  disabled={!addressToMintTo}
-                  className={`text-black press-start-2p-regular text-[1.3em] connect-btn w-fit 
+
+            <div className="w-full flex justify-center items-center">
+              <button
+                disabled={!addressToMintTo}
+                className={`text-black press-start-2p-regular text-[1.3em] connect-btn w-fit 
                   ${!addressToMintTo
-                      ? "connect-btn-disabled text-[#010104] text-opacity-[60%] hover:cursor-not-allowed"
-                      : ""
-                    }`}
-                  onClick={handleNextClick}
-                >
-                  Mint Genesis
-                </button>
-              </div>
-            }
+                    ? "connect-btn-disabled text-[#010104] text-opacity-[60%] hover:cursor-not-allowed"
+                    : ""
+                  }`}
+                onClick={handleNextClick}
+              >
+                Mint Genesis
+              </button>
+            </div>
+
 
           </div>
         ) : !isAnyDataAvailable ? (
           <div className="text-white border border-[#595D74] bg-[#000000] bg-opacity-[50%] flex gap-[12px] items-center justify-center px-[24px] py-[20px] rounded-[9px]">
             <img src="/warning.svg" className="w-[31px] h-[31px]" />
-            NOT ELIGIBLE TO MINT: MUST HAVE ACTIVITY ON ANY OF THE LISTED DAPPS
+            NOT ELIGIBLE TO MINT
           </div>
         ) : null}
       </div>

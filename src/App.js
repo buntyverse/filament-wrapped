@@ -15,8 +15,7 @@ function App() {
   const { address: connectedWalletAddress, isConnected } = useAccount();
 
   const addressToPass = connectedWalletAddress || walletAddress;
-  // const addressToPass = '0xb0f9f73a241f6a0d8551f21adcd1fb06080af4f2';
-
+  // const addressToPass = 'stars1z98eg2ztdp2glyla62629nrlvczg8s7fmhvvxh';
 
   const fetchData = () => {
     setIsDashboardVisible(true);
@@ -29,7 +28,7 @@ function App() {
 
   return (
     <div className="text-white flex flex-col justify-start items-start">
-      <ScrollControl isConnected={true} />
+      <ScrollControl isConnected={isConnected} />
       <section className="section h-lvh w-lvw relative section1" id="section1">
         <img src="/spage-bg.webp" className="absolute object-cover bottom-0 w-lvw z-10" />
         <WrappedCircle

@@ -9,14 +9,14 @@ const Sloth = ({ walletAddress }) => {
 
   return (
        <>
-          <div className="cardMoprh px-[29px] py-[33px] h-[280px] w-[317px] flex flex-col justify-between items-center">
+          <div className="cardMoprh px-[29px] py-[33px] h-[263px] w-[317px] flex flex-col justify-between items-center">
               <div className='flex flex-col items-center justify-center'>
                               <img
               className="w-[67px] h-[67px]"
               src="/sloth.png"
               alt="Asset"
               />
-              <p className='press-start-2p-regular text-white text-[24px] mt-[15px] text-center'>Celestine Sloth</p>
+              <p className='press-start-2p-regular text-white text-[20px] mt-[15px] text-center'>Celestine Sloth</p>
               
               </div>
 
