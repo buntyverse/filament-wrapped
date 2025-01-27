@@ -86,6 +86,10 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
       };
     });
   };
+  const handleTwitterDisconnect = () => {
+    setTwitterUserName("");
+    setIsAnyDataAvailable(false);
+  };
 
   const handleNextClick = () => {
     setShowNewComponent(true);
@@ -283,6 +287,7 @@ Mint yours here: genesis.filament.finance`;
                                   </button> */}
                           <TwitterAuth
                             setTwitterUserName={setTwitterUserName}
+                            onTwitterDisconnect={handleTwitterDisconnect}
                           />
                           <button
                             onClick={openAccountModal}

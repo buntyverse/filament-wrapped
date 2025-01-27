@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth, twitterProvider } from "../config/firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 
-const TwitterAuth = ({setTwitterUserName}) => {
+const TwitterAuth = ({setTwitterUserName, onTwitterDisconnect }) => {
 
     const [displayName, setDisplayName] = useState("");
     const [userName, setUserName] = useState("");
@@ -34,6 +34,10 @@ const TwitterAuth = ({setTwitterUserName}) => {
         await signOut(auth);
             setUser(null); // Clear user state on logout
             setDisplayName("");
+
+             if (onTwitterDisconnect) {
+        onTwitterDisconnect();
+      }
         console.log("User signed out.");
         } catch (error) {
         console.error("Error during logout:", error.message);
