@@ -3,22 +3,21 @@ import "./Dashboard.css";
 import BadgeCard from "../Cards/SummaryCard";
 import { FaAngleRight } from "react-icons/fa6";
 import { MdArrowBackIos } from "react-icons/md";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import mintNFT from "../mintNFT";
 import MintedToast from "../Cards/MintedToast";
 import TwitterAuth from "./TwitterAuth";
 import { useAtom } from "jotai";
 import { flpAmt } from "../config/atoms";
 import userData from "../assets/converted_file_new.json";
-
+import { useChain } from '@cosmos-kit/react';
 import starGazeList1 from "../assets/starGazeAddresses1.json";
 import starGazeList2 from "../assets/starGazeAddresses2.json";
 import eligibleEthAddresses from '../assets/ethEligibleWallets.json'
-
 import { FaXTwitter } from "react-icons/fa6";
 import KaitoCard from "../platforms/KaitoCard";
 import BadKidsCard from "../platforms/BadKidsCard";
 import Sloth from "../platforms/Sloth";
+import { CardStepper } from "../Cards/Profile";
 
 const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
   const [showToast, setShowToast] = useState(false);
@@ -67,6 +66,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
     setIsAnyDataAvailable(false);
   }, [walletAddress, twitterUserName, starGazeList1, starGazeList2, eligibleEthAddresses]);
 
+
   const [summaryData, setSummaryData] = useState({
     totalVolume: 0,
     totalPnL: 0,
@@ -86,10 +86,13 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
       };
     });
   };
+  
   const handleTwitterDisconnect = () => {
     setTwitterUserName("");
     setIsAnyDataAvailable(false);
   };
+
+  
 
   const handleNextClick = () => {
     setShowNewComponent(true);
@@ -103,25 +106,36 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
     }
   };
 
-  console.log("isAnyDataAvailable", isAnyDataAvailable);
+  const { connect, disconnect, isWalletConnected, address, status, error } = useChain('stargaze'); 
+
+
+  const handleDisconnect = () => {
+    console.log(status)
+    console.log('disconn')
+    disconnect()
+    
+    
+  };
+
+  console.log("isAnyDataAvailable", isAnyDataAvailable, walletAddress);
 
   const handleNFT = async () => {
     try {
       setMintingNft(true);
 
-      const res = await mintNFT(addressToMintTo);  //  address to mint to
+      const res = await mintNFT(addressToMintTo, address);  //  address to mint to
 
       // will mint to entered address & not connected wallet address
       console.log("resp", res?.onChain?.status);
-
-      if (res?.onChain?.status === "pending") {
+      console.log(res)
+      if (res.status = "200") {
         localStorage.setItem("nftMinted", "true");
         setIsAlreadyMinted(true);
         setShowToast(true);
 
         setTimeout(() => {
           setShowToast(false);
-        }, 3000);
+        }, 4000);
       }
     } catch (e) {
       console.error("Error minting NFT:", e);
@@ -200,122 +214,34 @@ Mint yours here: genesis.filament.finance`;
           } items-center`}
       >
         {!showNewComponent ? (
+         
           <div className="screen-1 pt-[40px]">
-            <ConnectButton.Custom>
-              {({
-                account,
-                chain,
-                openAccountModal,
-                openChainModal,
-                openConnectModal,
-                authenticationStatus,
-                mounted,
-              }) => {
-                // Note: If your app doesn't use authentication, you
-                // can remove all 'authenticationStatus' checks
-                const ready = mounted && authenticationStatus !== "loading";
-                const connected =
-                  ready &&
-                  account &&
-                  chain &&
-                  (!authenticationStatus ||
-                    authenticationStatus === "authenticated");
-
-                return (
-                  <div
-                    {...(!ready && {
-                      "aria-hidden": true,
-                      style: {
-                        opacity: 0,
-                        pointerEvents: "none",
-                        userSelect: "none",
-                      },
-                    })}
-                  >
-                    {(() => {
-                      if (!connected) {
-                        return (
-                          <button
-                            className="connect-button"
-                            onClick={openConnectModal}
-                            type="button"
-                          >
-                            Connect Wallet
-                          </button>
-                        );
-                      }
-
-                      if (chain.unsupported) {
-                        return (
-                          <button onClick={openChainModal} type="button">
-                            Wrong network
-                          </button>
-                        );
-                      }
-
-                      return (
-                        <div
-                          style={{ display: "flex", gap: 12 }}
-                          className=" justify-end"
-                        >
-                          {/* <button
-                                    onClick={openChainModal}
-                                    style={{ display: 'flex', alignItems: 'center' }}
-                                    type="button"
-                                  >
-                                    {chain.hasIcon && (
-                                      <div
-                                        style={{
-                                          background: chain.iconBackground,
-                                          width: 12,
-                                          height: 12,
-                                          borderRadius: 999,
-                                          overflow: 'hidden',
-                                          marginRight: 4,
-                                        }}
-                                      >
-                                        {chain.iconUrl && (
-                                          <img
-                                            alt={chain.name ?? 'Chain icon'}
-                                            src={chain.iconUrl}
-                                            style={{ width: 12, height: 12 }}
-                                          />
-                                        )}
-                                      </div>
-                                    )}
-                                    {chain.name}
-                                  </button> */}
-                          <TwitterAuth
-                            setTwitterUserName={setTwitterUserName}
-                            onTwitterDisconnect={handleTwitterDisconnect}
-                          />
-                          <button
-                            onClick={openAccountModal}
-                            type="button"
-                            className="disconnect-btn press-start-2p-regular text-[16px]"
-                          >
-                            {account.displayName}
-                          </button>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                );
-              }}
-            </ConnectButton.Custom>
             <div className="data-section flex-1 w-full flex-wrap mt-6">
               <BadKidsCard walletAddress={walletAddress} />
-              <KaitoCard />
+        
               <Sloth walletAddress={walletAddress} />
             </div>
+            <br>
+            </br>
+            <div className="flex flex-col justify-center items-center z-50">
+            <button
+           className="back-btn press-start-2p-regular h-fit text-white text-[1.3em]"
+           onClick={handleDisconnect}
+         >
+           <p>Disconnect</p>
+         </button>
+         </div>
           </div>
+          
+    
         ) : (
           <div className="badge-section w-full flex flex-col justify-between px-[103px]">
             <BadgeCard
               walletAddress={walletAddress}
-              summaryData={summaryData}
+             
               handleBackClick={handleBackClick}
-            />
+            /> 
+          
             {!isAlreadyMinted && mintedNft < 2000 && (
               <div className="flex justify-center gap-6">
                 <button
@@ -337,6 +263,7 @@ Mint yours here: genesis.filament.finance`;
             )}
 
             {isAlreadyMinted && mintedNft < 2000 && (
+            <div>
               <div
                 className="flex justify-center gap-6"
                 onClick={shareOnTwitter}
@@ -344,7 +271,10 @@ Mint yours here: genesis.filament.finance`;
                 <button className="connect-btn whitespace-nowrap press-start-2p-regular h-fit max-w-fit text-[1.3em] flex-1">
                   Share on X
                 </button>
+               
               </div>
+              
+             </div>
             )}
 
             {mintedNft >= 2000 && (

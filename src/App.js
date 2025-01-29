@@ -2,20 +2,24 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/Home/Navbar";
 import WrappedCircle from "./components/Home/WrappedCircle";
 import Dashboard from "./components/Dashboard/Dashboard";
-import { useAccount } from "wagmi";
+
 import './App.css';
 import ScrollControl from "./components/Home/ScrollControl";
+import { useChain } from '@cosmos-kit/react';
+
 
 
 function App() {
 
+  const { connect, disconnect, isWalletConnected, address, status, error } = useChain('stargaze'); 
+
   const [walletAddress, setWalletAddress] = useState("");
   const [isDashboardVisible, setIsDashboardVisible] = useState(false);
 
-  const { address: connectedWalletAddress, isConnected } = useAccount();
+ // const { address: connectedWalletAddress, isConnected } = useAccount();
 
-  const addressToPass = connectedWalletAddress || walletAddress;
-  // const addressToPass = 'stars1z98eg2ztdp2glyla62629nrlvczg8s7fmhvvxh';
+ const addressToPass = address || '';
+   // const addressToPass = 'stars1z98eg2ztdp2glyla62629nrlvczg8s7fmhvvxh';
 
   const fetchData = () => {
     setIsDashboardVisible(true);
@@ -28,17 +32,17 @@ function App() {
 
   return (
     <div className="text-white flex flex-col justify-start items-start">
-      <ScrollControl isConnected={isConnected} />
+      <ScrollControl isConnected={isWalletConnected}/>
       <section className="section h-lvh w-lvw relative section1" id="section1">
         <img src="/spage-bg.webp" className="absolute object-cover bottom-0 w-lvw z-10" />
         <WrappedCircle
-          walletAddress={walletAddress}
+          walletAddress={address}
           setWalletAddress={setWalletAddress}
           fetchData={fetchData}
         />
       </section>
-      <section className="section h-lvh relative w-lvw" id="section2">
-        <img src="/grid-bg.svg" className="absolute object-cover top-0 w-lvw z-10" />
+     <section className="section h-lvh relative w-lvw" id="section2">
+       <img src="/grid-bg.svg" className="absolute object-cover top-0 w-lvw z-10" />
         <Dashboard
           walletAddress={addressToPass}
           handleBackButtonClick={handleBackButtonClick}

@@ -2,13 +2,14 @@
 // or "polygon-amoy", "ethereum-sepolia", ... // or "www"
 
 
-const mintNFT = async(address) => {
+const mintNFT = async(address, EVMaddress) => {
 
-    const url = `https://web-production-a568b.up.railway.app/mint/${address}`;
+    const url = `https://web-production-a568b.up.railway.app/mint/${address}/${EVMaddress}`;
 
     const options = {
         method: "POST",
         headers: {
+      
             "x-client-api-key": process.env.REACT_APP_GENESIS_API_KEY,
         },
     };

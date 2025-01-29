@@ -102,9 +102,7 @@ export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadIm
     );
   };
 
-  if (!badges || badges.length === 0) {
-    return <div>No badges available</div>;
-  }
+ 
 
   const currentCard = badges[currentCardIndex];
 
@@ -139,11 +137,11 @@ export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadIm
         {/* Card Content */}
         <div className="flex-grow flex items-center justify-center relative mt-4">
           <div className="rounded-lg w-full max-w-[95%] md:max-w-[400px]">
-            {currentCard.imageUrl && (
+          
               <div className=" rounded-[19px]">
                 <img src="/genesis.gif"></img>
               </div>
-            )}
+          
           </div>
         </div>
       </div>
