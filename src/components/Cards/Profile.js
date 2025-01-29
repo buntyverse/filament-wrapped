@@ -119,8 +119,8 @@ export const CardStepper = ({ badges, walletAddress, handleCopyImage, downloadIm
         {/* Progress Bar */}
         <div className="mt-[24px] flex flex-col gap-2">
           <div className="flex w-full justify-between text-[32px]">
-            <span>{((mintedNft / 2000) * 100).toFixed(2)}%</span>
-            <span>{`${mintedNft}/2000`}</span>
+            <span>{((mintedNft / 1000) * 100).toFixed(2)}%</span>
+            <span>{`${mintedNft}/1000`}</span>
           </div>
           <div className="w-full h-2 bg-white bg-opacity-[10%] mt-2 rounded-full overflow-hidden">
             <div
