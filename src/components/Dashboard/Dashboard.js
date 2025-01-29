@@ -184,7 +184,7 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
 
   const twitterText = `Just minted my Filament Genesis NFT 
 
-If you've ever been a perps trader, or a kaito yapper
+If you hold a bad kid or a celestine sloth,
 
 Mint yours here: genesis.filament.finance`;
 
