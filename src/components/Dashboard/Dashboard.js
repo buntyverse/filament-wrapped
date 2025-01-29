@@ -49,11 +49,11 @@ const Dashboard = ({ walletAddress, handleBackButtonClick }) => {
       (user) => user.username === twitterUserName
     );
 
-    const isInBadKids = starGazeList1.some(
+    const isInBadKids = starGazeList2.some(
       (user) => user.address.toLowerCase() === walletAddress.toLowerCase()
     );
 
-    const isInSloth = starGazeList2.some(
+    const isInSloth = starGazeList1.some(
       (user) => user.address.toLowerCase() === walletAddress.toLowerCase()
     );
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import starGazeList2 from '../assets/starGazeAddresses2.json';
+import starGazeList1 from '../assets/starGazeAddresses1.json';
 
 const Sloth = ({ walletAddress }) => {
     
-    const isEligible = starGazeList2.some(
+    const isEligible = starGazeList1.some(
       (user) => user.address?.toLowerCase() === walletAddress?.toLowerCase()
     );
 
